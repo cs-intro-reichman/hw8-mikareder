@@ -91,8 +91,10 @@
         int count=0;
              for(int i=0; i<other.follows.length;i++){
                 for(int j=0; j<this.follows.length;j++){
-                    if(other.follows[i]==this.follows[j]){
+                    if(other.follows[i] != null && this.follows[j] != null &&
+                         other.follows[i].equals(this.follows[j])){
                         count++;
+                        break;
                     }
                 }
         }

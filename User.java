@@ -69,6 +69,9 @@
     /** Removes the given name from the follows list of this user. If successful, returns true.
      *  If the name is not in the list, does nothing and returns false. */
     public boolean removeFollowee(String name) {
+        if (name==null){
+            return false;
+        }
         for(int i=0; i<follows.length;i++){
             if(follows[i]==name){
                 follows[i]=null;
@@ -86,23 +89,12 @@
     /*  Notice: This is the size of the intersection of the two follows lists. */
     public int countMutual(User other) {
         int count=0;
-        if(other.follows.length>=follows.length){
              for(int i=0; i<other.follows.length;i++){
                 for(int j=0; j<this.follows.length;j++){
                     if(other.follows[i]==this.follows[j]){
                         count++;
                     }
                 }
-        }
-        }
-        else {
-             for(int i=0; i<this.follows.length;i++){
-                for(int j=0; j<other.follows.length;j++){
-                    if(other.follows[i]==this.follows[j]){
-                        count++;
-                    }
-                }
-        }
         }
        
         return count;
@@ -111,12 +103,13 @@
     /** Checks is this user is a friend of the other user.
      *  (if two users follow each other, they are said to be "friends.") */
     public boolean isFriendOf(User other) {
-        int i=0;
-        while(other.follows[i]!=null && i!=other.follows.length-1){
-            if(other.follows[i]==name){
-                return true;
+        if(this.follows(other.name)){
+            for(int i=0;i<other.follows.length;i++){
+                if(other.follows[i]==name){
+              return true;
             }
-            i++;
+        }
+       
         }
         return false;
     }
